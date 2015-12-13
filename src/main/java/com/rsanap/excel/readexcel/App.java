@@ -43,31 +43,23 @@ public class App {
 				// For each row, iterate through all the columns
 				Iterator<Cell> cellIterator = row.cellIterator();
 
-				Integer column = 0;
 				while (cellIterator.hasNext()) {
 
 					Cell cell = cellIterator.next();
 					String folderPath = ROOTFOLDER;
 					// Check the cell type and format accordingly
-					switch (cell.getCellType()) {
-					case Cell.CELL_TYPE_NUMERIC:
-						System.out.print(cell.getNumericCellValue() + "t");
-						break;
-					case Cell.CELL_TYPE_STRING: {
-						String folderName = cell.getStringCellValue();
-						folderNames.put(cell.getColumnIndex(), folderName);
-						for (Integer index = 0; index < cell.getColumnIndex(); index++) {
-							folderNames.get((Integer) index);
-							folderPath = folderPath + FILESEPARATOR
-									+ folderNames.get(index);
-						}
-						folderPath = folderPath + FILESEPARATOR + folderName;
-						System.out.println("Createing folder " + folderPath);
-						createDirectory(folderPath);
-						break;
+
+					String folderName = cell.getStringCellValue();
+					folderNames.put(cell.getColumnIndex(), folderName);
+					for (Integer index = 0; index < cell.getColumnIndex(); index++) {
+						folderNames.get(index);
+						folderPath = folderPath + FILESEPARATOR
+								+ folderNames.get(index);
 					}
-					}
-					column++;
+					folderPath = folderPath + FILESEPARATOR + folderName;
+					System.out.println("Createing folder " + folderPath);
+					createDirectory(folderPath);
+
 				}
 				System.out.println("");
 			}
